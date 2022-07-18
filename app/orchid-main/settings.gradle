@@ -1,0 +1,4 @@
+rootProject.name = 'orchid'
+include ':orchid'
+include ':orchid-main'
+

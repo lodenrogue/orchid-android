@@ -9,6 +9,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.arkvis.orchid.OvulationPredictor
+import com.arkvis.orchid.PeriodCalendar
+import com.arkvis.orchid.PeriodPredictor
 import com.orchid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
+
+        val calendar = PeriodCalendar(PeriodPredictor(),  OvulationPredictor())
+
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
