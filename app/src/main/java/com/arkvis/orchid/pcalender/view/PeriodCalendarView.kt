@@ -1,33 +1,29 @@
-package com.orchid
+package com.arkvis.orchid.pcalender.view
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import com.arkvis.orchid.OvulationPredictor
-import com.arkvis.orchid.PeriodCalendar
-import com.arkvis.orchid.PeriodPredictor
-import com.orchid.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
+import com.arkvis.orchid.R
+import com.arkvis.orchid.databinding.PeriodCalendarActivityBinding
 
-class MainActivity : AppCompatActivity() {
-
+class PeriodCalendarView : AppCompatActivity() {
+    private lateinit var binding: PeriodCalendarActivityBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = PeriodCalendarActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-
-        val calendar = PeriodCalendar(PeriodPredictor(),  OvulationPredictor())
 
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)

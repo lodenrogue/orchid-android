@@ -1,4 +1,4 @@
-package com.orchid
+package com.arkvis.orchid
 
 import org.junit.Test
 
