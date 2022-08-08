@@ -1,8 +1,11 @@
 package com.arkvis.orchid.pcalender.interfaces
 
+import com.arkvis.orchid.Day
+import java.time.LocalDate
+
 interface PeriodCalendarDataInteractor {
-    fun getPeriodDays()
-    fun setPeriodDays()
+    fun getPeriodDayInfo(date: LocalDate) : Day
+    fun setPeriodDay(date: LocalDate)
 
 
     //Todo at a later time

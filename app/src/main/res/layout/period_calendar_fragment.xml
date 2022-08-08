@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pcalender.view.PeriodCalendarFragmentView">
+    tools:context="com.arkvis.orchid.pcalender.view.PeriodCalendarView">
 
     <CalendarView
         android:id="@+id/periodCalendar"
@@ -14,13 +14,201 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/orchidDateSelector"
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/periodCalendar" />
+
+    <!--    <include-->
+    <!--        android:id="@+id/periodCalendarControlLayout"-->
+    <!--        layout="@layout/period_calendar_controls_fragment"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/periodCalendar" />-->
+    <!--    Orchid Day  -->
+    <TextView
+        android:id="@+id/orchidDayLabel"
+        style="@style/CalendarStartControl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/space_md"
-        android:text="@string/orchid_days_selector"
+        android:text="@string/orchid_day_label"
+        app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/periodCalendar" />
+        app:layout_constraintTop_toBottomOf="@id/periodCalendar" />
 
+    <ToggleButton
+        android:id="@+id/orchidDayToggle"
+        style="@style/CalendarEndControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="@string/toggle_btn_off"
+        android:textOn="@string/toggle_btn_on"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/middleGuideLine"
+        app:layout_constraintTop_toTopOf="@id/orchidDayLabel" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/space_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/orchidDayLabel" />
+
+    <!--    Flow  -->
+    <TextView
+        android:id="@+id/flowLabel"
+        style="@style/CalendarStartControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/flow_label"
+        app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/orchidDayLabel" />
+
+    <TextView
+        android:id="@+id/flowValue"
+        style="@style/CalendarEndControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="light"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/middleGuideLine"
+        app:layout_constraintTop_toTopOf="@id/flowLabel" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/space_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flowLabel" />
+
+    <!--    Mucus -->
+    <TextView
+        android:id="@+id/mucusLabel"
+        style="@style/CalendarStartControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mucus_label"
+        app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flowLabel" />
+
+    <TextView
+        android:id="@+id/mucusValue"
+        style="@style/CalendarEndControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fluid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/middleGuideLine"
+        app:layout_constraintTop_toTopOf="@id/mucusLabel" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/space_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mucusLabel" />
+
+    <!--    Temperature  -->
+    <TextView
+        android:id="@+id/temperatureLabel"
+        style="@style/CalendarStartControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/temperature_label"
+        app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mucusLabel" />
+
+    <TextView
+        android:id="@+id/temperatureValue"
+        style="@style/CalendarEndControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/middleGuideLine"
+        app:layout_constraintTop_toTopOf="@id/temperatureLabel" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/space_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temperatureLabel" />
+
+    <!--    Ovulation  -->
+    <TextView
+        android:id="@+id/ovulationLabel"
+        style="@style/CalendarStartControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ovulation_label"
+        app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/temperatureLabel" />
+
+
+    <ToggleButton
+        android:id="@+id/ovulationToggle"
+        style="@style/CalendarEndControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="@string/toggle_btn_off"
+        android:textOn="@string/toggle_btn_on"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/middleGuideLine"
+        app:layout_constraintTop_toTopOf="@id/ovulationLabel" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/space_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ovulationLabel" />
+
+    <!--    Fertility  -->
+    <TextView
+        android:id="@+id/fertilityLabel"
+        style="@style/CalendarStartControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fertility_label"
+        app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ovulationLabel" />
+
+    <ToggleButton
+        android:id="@+id/fertilityToggle"
+        style="@style/CalendarEndControl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOff="@string/toggle_btn_off"
+        android:textOn="@string/toggle_btn_on"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/middleGuideLine"
+        app:layout_constraintTop_toTopOf="@id/fertilityLabel" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fertilityLabel" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middleGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

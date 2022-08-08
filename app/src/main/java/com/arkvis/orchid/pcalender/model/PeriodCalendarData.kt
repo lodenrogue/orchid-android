@@ -1,15 +1,21 @@
 package com.arkvis.orchid.pcalender.model
 
+import com.arkvis.orchid.Day
+import com.arkvis.orchid.OvulationPredictor
+import com.arkvis.orchid.PeriodCalendar
+import com.arkvis.orchid.PeriodPredictor
 import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarDataInteractor
+import java.time.LocalDate
 
 class PeriodCalendarData : PeriodCalendarDataInteractor {
-    override fun getPeriodDays() {
+    private var periodPredictor: PeriodPredictor = PeriodPredictor()
+    private var ovulationPredictor: OvulationPredictor = OvulationPredictor()
+    private var periodCalendar: PeriodCalendar = PeriodCalendar(periodPredictor, ovulationPredictor)
 
+    override fun getPeriodDayInfo(date: LocalDate) : Day =
+        periodCalendar.getDay(date)
 
-//        TODO("Not yet implemented")
-    }
-
-    override fun setPeriodDays() {
+    override fun setPeriodDay(date: LocalDate) {
 //        TODO("Not yet implemented")
     }
 

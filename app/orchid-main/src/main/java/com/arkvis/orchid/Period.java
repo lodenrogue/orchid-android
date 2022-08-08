@@ -1,6 +1,6 @@
 package com.arkvis.orchid;
 
-class Period {
+public class Period {
 
     private Flow flow;
 

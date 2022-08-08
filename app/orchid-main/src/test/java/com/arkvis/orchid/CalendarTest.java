@@ -65,44 +65,44 @@ class CalendarTest {
     @Test
     void should_returnCorrectFlow_when_periodAddedWithLightFlow() {
         LocalDate date = LocalDate.now();
-        periodCalendar.addPeriod(date, Flow.LIGHT);
+        periodCalendar.addPeriod(date, Flow.Light);
 
         Day retrievedDay = periodCalendar.getDay(date);
         Period retrievedPeriod = retrievedDay.getPeriod();
 
-        assertEquals(Flow.LIGHT, retrievedPeriod.getFlow());
+        assertEquals(Flow.Light, retrievedPeriod.getFlow());
     }
 
     @Test
     void should_returnCorrectFlow_when_periodAddedWithMediumFlow() {
         LocalDate date = LocalDate.now();
-        periodCalendar.addPeriod(date, Flow.MEDIUM);
+        periodCalendar.addPeriod(date, Flow.Medium);
 
         Day retrievedDay = periodCalendar.getDay(date);
         Period retrievedPeriod = retrievedDay.getPeriod();
 
-        assertEquals(Flow.MEDIUM, retrievedPeriod.getFlow());
+        assertEquals(Flow.Medium, retrievedPeriod.getFlow());
     }
 
     @Test
     void should_returnCorrectFlow_when_periodAddedWithHeavyFlow() {
         LocalDate date = LocalDate.now();
-        periodCalendar.addPeriod(date, Flow.HEAVY);
+        periodCalendar.addPeriod(date, Flow.Heavy);
 
         Day retrievedDay = periodCalendar.getDay(date);
         Period retrievedPeriod = retrievedDay.getPeriod();
 
-        assertEquals(Flow.HEAVY, retrievedPeriod.getFlow());
+        assertEquals(Flow.Heavy, retrievedPeriod.getFlow());
     }
 
     @Test
     void should_returnCorrectFlow_when_periodAddedWithSpottingFlow() {
         LocalDate date = LocalDate.now();
-        periodCalendar.addPeriod(date, Flow.SPOTTING);
+        periodCalendar.addPeriod(date, Flow.Spotting);
 
         Day retrievedDay = periodCalendar.getDay(date);
         Period retrievedPeriod = retrievedDay.getPeriod();
-        assertEquals(Flow.SPOTTING, retrievedPeriod.getFlow());
+        assertEquals(Flow.Spotting, retrievedPeriod.getFlow());
     }
 
     @Test
@@ -133,7 +133,7 @@ class CalendarTest {
         Temperature temperature = new Temperature(new BigDecimal("100"), Metric.FAHRENHEIT);
 
         periodCalendar.addTemperature(date, temperature);
-        periodCalendar.addPeriod(date, Flow.HEAVY);
+        periodCalendar.addPeriod(date, Flow.Heavy);
 
 
         Day retrievedDay = periodCalendar.getDay(date);
@@ -142,6 +142,6 @@ class CalendarTest {
 
         assertEquals(temperature.getValue(), retrievedTemp.getValue());
         assertEquals(temperature.getMetric(), retrievedTemp.getMetric());
-        assertEquals(Flow.HEAVY, retrievedPeriod.getFlow());
+        assertEquals(Flow.Heavy, retrievedPeriod.getFlow());
     }
 }

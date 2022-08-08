@@ -1,13 +1,13 @@
 package com.arkvis.orchid.pcalender.view
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.arkvis.orchid.Day
+import com.arkvis.orchid.Flow
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.arkvis.orchid.R
 import com.arkvis.orchid.databinding.PeriodCalendarFragmentBinding
@@ -19,6 +19,7 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarViewInteractor {
 
     private var periodCalendarPresenter = PeriodCalendarPresenter(this)
     private var _binding: PeriodCalendarFragmentBinding? = null
+    private var currentSelectedDay: Day = periodCalendarPresenter.getOrchidInfoToday()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -32,11 +33,11 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarViewInteractor {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        periodCalendarPresenter.getPeriodDates()
+        initCalendarControl()
+//        periodCalendarPresenter.getPeriodDates()
         testing()
 
 //        binding.orchidDateSelector.setOnClickListener {
@@ -61,7 +62,25 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarViewInteractor {
 //    }
 //
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    private fun initCalendarControl() {
+        binding.orchidDayToggle.isChecked = true
+
+        binding.flowValue.text = Flow.Medium.name
+        currentSelectedDay.period?.let {
+            binding.orchidDayToggle.isChecked = true
+            binding.flowValue.text = it.flow.name
+            binding.mucusValue.text = getText(R.string.feature_upcoming)
+        }
+        currentSelectedDay.temperature?.let {
+            binding.temperatureValue.text =
+                resources.getString(R.string.temperature_formatter, it.value, it.metric.name)
+        }
+        if(binding.orchidDayToggle.isChecked){
+            binding.ovulationToggle.isChecked = false
+            binding.fertilityToggle.isChecked = false
+        }
+    }
+
     private fun testing() {
 //        val calendar = PeriodCalendar(PeriodPredictor(), OvulationPredictor())
 //        val periodDate: LocalDate = now()
@@ -74,24 +93,31 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarViewInteractor {
 //            binding.periodCalendar.date = date.getLong(ChronoField.DAY_OF_MONTH)
 //        }
 
-        val builder :  MaterialDatePicker.Builder<Long> = MaterialDatePicker.Builder.datePicker()
+        val builder: MaterialDatePicker.Builder<Long> = MaterialDatePicker.Builder.datePicker()
         builder.setTitleText(getString(R.string.orchid_day_selector_title))
-        val datePicker : MaterialDatePicker<Long> = builder.build()
+//        val datePicker : MaterialDatePicker<Long> = builder.build()
 
-        binding.orchidDateSelector.setOnClickListener {
-            datePicker.show(parentFragmentManager, datePicker.toString())
-        }
-        datePicker.addOnPositiveButtonClickListener {
-            Toast.makeText(
-                requireContext(),
-                "Selected Date : " + datePicker.headerText,
-                Toast.LENGTH_SHORT
-            ).show()
-            binding.periodCalendar.date =
-                periodCalendarPresenter.getFormatedSelectedDate(it)
-
-        }
+//        binding.orchidDateSelector.setOnClickListener {
+//            datePicker.show(parentFragmentManager, datePicker.toString())
+//        }
+//        datePicker.addOnPositiveButtonClickListener {
+//            Toast.makeText(
+//                requireContext(),
+//                "Selected Date : " + datePicker.headerText,
+//                Toast.LENGTH_SHORT
+//            ).show()
+//            binding.periodCalendar.date =
+//                periodCalendarPresenter.getFormatedSelectedDate(it)
+//
+//        }
         binding.periodCalendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
+
+            //Todo implement logic to send data to presenter
+//            val localDate: LocalDate = LocalDate.of(year, month, dayOfMonth)
+
+            currentSelectedDay
+
+
             // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
             val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
             Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
