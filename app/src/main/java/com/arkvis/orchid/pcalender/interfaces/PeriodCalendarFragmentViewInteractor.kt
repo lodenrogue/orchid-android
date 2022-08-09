@@ -1,5 +1,5 @@
 package com.arkvis.orchid.pcalender.interfaces
 
-interface PeriodCalendarViewInteractor {
+interface PeriodCalendarFragmentViewInteractor {
     fun showPeriodOnCalendar()
 }

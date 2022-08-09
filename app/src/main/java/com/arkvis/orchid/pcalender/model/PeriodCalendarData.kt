@@ -1,13 +1,20 @@
 package com.arkvis.orchid.pcalender.model
 
+import android.app.Application
 import com.arkvis.orchid.Day
 import com.arkvis.orchid.OvulationPredictor
 import com.arkvis.orchid.PeriodCalendar
 import com.arkvis.orchid.PeriodPredictor
+import com.arkvis.orchid.common.LocalStorageHelper
 import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarDataInteractor
+import org.koin.core.Koin
+import org.koin.java.KoinJavaComponent.inject
 import java.time.LocalDate
 
 class PeriodCalendarData : PeriodCalendarDataInteractor {
+    private val localStorageHelper : LocalStorageHelper by inject()
+
+
     private var periodPredictor: PeriodPredictor = PeriodPredictor()
     private var ovulationPredictor: OvulationPredictor = OvulationPredictor()
     private var periodCalendar: PeriodCalendar = PeriodCalendar(periodPredictor, ovulationPredictor)

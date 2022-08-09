@@ -1,7 +1,8 @@
 package com.arkvis.orchid.pcalender.interfaces
 
 import com.arkvis.orchid.Day
+import org.koin.core.component.KoinComponent
 
-interface PeriodCalendarPresenterInteractor {
-    fun getOrchidInfoToday() : Day
+interface PeriodCalendarPresenterInteractor : KoinComponent {
+    fun getOrchidInfoToday() : Day?
 }

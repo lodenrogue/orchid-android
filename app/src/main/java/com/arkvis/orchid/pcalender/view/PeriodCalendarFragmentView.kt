@@ -8,18 +8,21 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.arkvis.orchid.Day
 import com.arkvis.orchid.Flow
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.arkvis.orchid.R
 import com.arkvis.orchid.databinding.PeriodCalendarFragmentBinding
-import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarViewInteractor
+import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarFragmentViewInteractor
 import com.arkvis.orchid.pcalender.presenter.PeriodCalendarPresenter
+import com.google.android.material.datepicker.MaterialDatePicker
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 
-class PeriodCalendarFragmentView : Fragment(), PeriodCalendarViewInteractor {
+class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInteractor, KoinComponent {
 
-    private var periodCalendarPresenter = PeriodCalendarPresenter(this)
+//    private var periodCalendarPresenter = PeriodCalendarPresenter(this)
+    private var periodCalendarPresenter : PeriodCalendarPresenter by inject()
     private var _binding: PeriodCalendarFragmentBinding? = null
-    private var currentSelectedDay: Day = periodCalendarPresenter.getOrchidInfoToday()
+    private var currentSelectedDay: Day? = periodCalendarPresenter.getOrchidInfoToday()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -66,12 +69,12 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarViewInteractor {
         binding.orchidDayToggle.isChecked = true
 
         binding.flowValue.text = Flow.Medium.name
-        currentSelectedDay.period?.let {
+        currentSelectedDay?.period?.let {
             binding.orchidDayToggle.isChecked = true
             binding.flowValue.text = it.flow.name
             binding.mucusValue.text = getText(R.string.feature_upcoming)
         }
-        currentSelectedDay.temperature?.let {
+        currentSelectedDay?.temperature?.let {
             binding.temperatureValue.text =
                 resources.getString(R.string.temperature_formatter, it.value, it.metric.name)
         }

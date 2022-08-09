@@ -1,17 +1,17 @@
 package com.arkvis.orchid.pcalender.presenter
 
 import com.arkvis.orchid.Day
-import com.arkvis.orchid.PeriodCalendar
 import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarPresenterInteractor
 import com.arkvis.orchid.pcalender.model.PeriodCalendarData
 import com.arkvis.orchid.pcalender.view.PeriodCalendarFragmentView
+import org.koin.core.component.inject
 import java.time.LocalDate
 import java.util.*
 
-class PeriodCalendarPresenter(
-    private val periodCalendarView: PeriodCalendarFragmentView)  :
+class PeriodCalendarPresenter(periodCalendarView: PeriodCalendarFragmentView)  :
     PeriodCalendarPresenterInteractor {
-    private val periodCalendarData = PeriodCalendarData()
+
+    private val periodCalendarData : PeriodCalendarData by inject()
 
 //    fun getPeriodDates() = periodCalendarData.getPeriodDays()
 
@@ -22,7 +22,7 @@ class PeriodCalendarPresenter(
         return selectedDate + offsetFromUTC
     }
 
-    override fun getOrchidInfoToday() : Day =
-        periodCalendarData.getPeriodDayInfo(LocalDate.now())
+    override fun getOrchidInfoToday() : Day? =
+        periodCalendarData?.getPeriodDayInfo(LocalDate.now())
 
 }

@@ -8,11 +8,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.arkvis.orchid.BaseActivity
 import com.google.android.material.snackbar.Snackbar
 import com.arkvis.orchid.R
 import com.arkvis.orchid.databinding.PeriodCalendarActivityBinding
 
-class PeriodCalendarView : AppCompatActivity() {
+class PeriodCalendarView : BaseActivity() {
     private lateinit var binding: PeriodCalendarActivityBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
 
