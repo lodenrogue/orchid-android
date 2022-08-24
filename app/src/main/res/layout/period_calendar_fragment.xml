@@ -20,15 +20,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/periodCalendar" />
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/currentDate"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/periodCalendar" />
 
-    <!--    <include-->
-    <!--        android:id="@+id/periodCalendarControlLayout"-->
-    <!--        layout="@layout/period_calendar_controls_fragment"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/periodCalendar" />-->
-    <!--    Orchid Day  -->
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/space_md"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/currentDate" />
+
     <TextView
         android:id="@+id/orchidDayLabel"
         style="@style/CalendarStartControl"
@@ -37,7 +46,7 @@
         android:text="@string/orchid_day_label"
         app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/periodCalendar" />
+        app:layout_constraintTop_toBottomOf="@id/currentDate" />
 
     <ToggleButton
         android:id="@+id/orchidDayToggle"
@@ -204,6 +213,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fertilityLabel" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/space_xs"
+        android:layout_marginBottom="@dimen/space_xs"
+        android:contentDescription="@string/fab"
+        android:backgroundTint="@color/white"
+        app:backgroundTint="@color/black"
+        app:borderWidth="@dimen/border_xs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/middleGuideLine"

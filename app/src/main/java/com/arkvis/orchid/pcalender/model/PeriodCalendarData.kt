@@ -1,37 +1,32 @@
 package com.arkvis.orchid.pcalender.model
 
-import android.app.Application
-import com.arkvis.orchid.Day
-import com.arkvis.orchid.OvulationPredictor
-import com.arkvis.orchid.PeriodCalendar
-import com.arkvis.orchid.PeriodPredictor
-import com.arkvis.orchid.common.LocalStorageHelper
+import com.arkvis.orchid.*
+import com.arkvis.orchid.BaseApp.Companion.localStorage
 import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarDataInteractor
-import org.koin.core.Koin
-import org.koin.java.KoinJavaComponent.inject
 import java.time.LocalDate
 
 class PeriodCalendarData : PeriodCalendarDataInteractor {
-    private val localStorageHelper : LocalStorageHelper by inject()
 
+    private var periodPredictor: PeriodPredictor = localStorage?.periodPredictor ?:PeriodPredictor()
+    private var ovulationPredictor: OvulationPredictor = localStorage?.ovulationPredictor ?:OvulationPredictor()
+    private var periodCalendar: PeriodCalendar = localStorage?.periodCalendar ?: PeriodCalendar(periodPredictor, ovulationPredictor)
 
-    private var periodPredictor: PeriodPredictor = PeriodPredictor()
-    private var ovulationPredictor: OvulationPredictor = OvulationPredictor()
-    private var periodCalendar: PeriodCalendar = PeriodCalendar(periodPredictor, ovulationPredictor)
-
-    override fun getPeriodDayInfo(date: LocalDate) : Day =
+    override fun getPeriodDayInfo(date: LocalDate): Day? =
         periodCalendar.getDay(date)
 
-    override fun setPeriodDay(date: LocalDate) {
-//        TODO("Not yet implemented")
+    override fun setPeriodDay(date: LocalDate?) {
+        periodCalendar.addPeriod(date)
+        onUpdate()
     }
 
-    override fun getTemperature() {
-//        TODO("Not yet implemented")
+    override fun getTemperature(): Temperature? {
+        //        TODO("Not yet implemented")
+        return null
     }
 
-    override fun setTemperature() {
-//        TODO("Not yet implemented")
+    override fun setTemperature(date: LocalDate, temperature: Temperature) {
+        periodCalendar.addTemperature(date, temperature)
+        onUpdate()
     }
 
     override fun getCervicalMucus() {
@@ -64,5 +59,9 @@ class PeriodCalendarData : PeriodCalendarDataInteractor {
 
     override fun setSexualIntercourseOccurrence() {
 //        TODO("Not yet implemented")
+    }
+
+    private fun onUpdate(){
+        localStorage?.periodCalendar = periodCalendar
     }
 }

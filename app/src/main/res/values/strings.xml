@@ -22,5 +22,4 @@
     <string name="toggle_btn_off" tools:ignore="ExtraTranslation">No</string>
     <string name="temperature_formatter" tools:ignore="ExtraTranslation">%d %s</string>
     <string name="feature_upcoming" tools:ignore="ExtraTranslation">Upcoming Feature</string>
-
 </resources>

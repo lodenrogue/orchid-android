@@ -1,16 +1,17 @@
 package com.arkvis.orchid.pcalender.interfaces
 
 import com.arkvis.orchid.Day
+import com.arkvis.orchid.Temperature
 import java.time.LocalDate
 
 interface PeriodCalendarDataInteractor {
-    fun getPeriodDayInfo(date: LocalDate) : Day
-    fun setPeriodDay(date: LocalDate)
+    fun getPeriodDayInfo(date: LocalDate) : Day?
+    fun setPeriodDay(date: LocalDate?)
 
 
     //Todo at a later time
-    fun getTemperature()
-    fun setTemperature()
+    fun getTemperature(): Temperature?
+    fun setTemperature(date: LocalDate , temperature: Temperature)
 
     fun getCervicalMucus()
     fun setCervicalMucus()

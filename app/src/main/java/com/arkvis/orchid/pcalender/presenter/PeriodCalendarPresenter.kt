@@ -4,16 +4,13 @@ import com.arkvis.orchid.Day
 import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarPresenterInteractor
 import com.arkvis.orchid.pcalender.model.PeriodCalendarData
 import com.arkvis.orchid.pcalender.view.PeriodCalendarFragmentView
-import org.koin.core.component.inject
 import java.time.LocalDate
 import java.util.*
 
 class PeriodCalendarPresenter(periodCalendarView: PeriodCalendarFragmentView)  :
     PeriodCalendarPresenterInteractor {
 
-    private val periodCalendarData : PeriodCalendarData by inject()
-
-//    fun getPeriodDates() = periodCalendarData.getPeriodDays()
+    private val periodCalendarData = PeriodCalendarData()
 
     fun getFormatedSelectedDate(selectedDate: Long) : Long{
         val timeZoneUTC = TimeZone.getDefault()
@@ -23,6 +20,17 @@ class PeriodCalendarPresenter(periodCalendarView: PeriodCalendarFragmentView)  :
     }
 
     override fun getOrchidInfoToday() : Day? =
-        periodCalendarData?.getPeriodDayInfo(LocalDate.now())
+        periodCalendarData.getPeriodDayInfo(LocalDate.now())
+
+    override fun getOrchidInfoForDate(date: LocalDate) : Day? =
+        periodCalendarData.getPeriodDayInfo(date)
+
+    override fun setPeriodToday() {
+        periodCalendarData.setPeriodDay(LocalDate.now())
+    }
+
+    override fun setPeriod(date: LocalDate?) {
+        periodCalendarData.setPeriodDay(date)
+    }
 
 }

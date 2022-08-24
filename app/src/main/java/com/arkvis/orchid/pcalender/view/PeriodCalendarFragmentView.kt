@@ -1,10 +1,12 @@
 package com.arkvis.orchid.pcalender.view
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import com.arkvis.orchid.Day
 import com.arkvis.orchid.Flow
@@ -12,15 +14,14 @@ import com.arkvis.orchid.R
 import com.arkvis.orchid.databinding.PeriodCalendarFragmentBinding
 import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarFragmentViewInteractor
 import com.arkvis.orchid.pcalender.presenter.PeriodCalendarPresenter
-import com.google.android.material.datepicker.MaterialDatePicker
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
-class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInteractor, KoinComponent {
+class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInteractor {
 
-//    private var periodCalendarPresenter = PeriodCalendarPresenter(this)
-    private var periodCalendarPresenter : PeriodCalendarPresenter by inject()
+    private val periodCalendarPresenter = PeriodCalendarPresenter(this)
     private var _binding: PeriodCalendarFragmentBinding? = null
     private var currentSelectedDay: Day? = periodCalendarPresenter.getOrchidInfoToday()
 
@@ -40,92 +41,90 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInterac
         super.onViewCreated(view, savedInstanceState)
 
         initCalendarControl()
-//        periodCalendarPresenter.getPeriodDates()
-        testing()
-
-//        binding.orchidDateSelector.setOnClickListener {
-//            findNavController().navigate(R.id.action_PeriodCalendarFragmentView_to_SecondFragment)
-//        }
     }
 
-//    @Throws(ParseException::class)
-//    private fun highlightDates(scheduleList: List<Schedule>) {
-//        for (position in scheduleList.indices) {
-//            val schedule: Schedule = scheduleList[position]
-//            if (schedule.getSessionStatus().equals("Incomplete")) {
-//                val color: Int = R.color.colorPrimaryDark
-//                val decorator = CurrentDayDecorator(Date(schedule.getScheduledDate()), color)
-//                binding.periodCalendar.addDec(decorator)
-//            }
-//        }
-//    }
-//
-//    private fun initViews() {
-//        calendarView = v.findViewById(R.id.calendarView)
-//    }
-//
-
     private fun initCalendarControl() {
-        binding.orchidDayToggle.isChecked = true
+        initCalendarControlListener()
+        initCalendarControlData()
+    }
 
+    private fun initCalendarControlListener() {
+        binding.orchidDayToggle.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.ovulationToggle.isChecked = false
+                binding.fertilityToggle.isChecked = false
+            }
+        }
+        binding.ovulationToggle.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.orchidDayToggle.isChecked = false
+                binding.fertilityToggle.isChecked = false
+            }
+        }
+        binding.fertilityToggle.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.orchidDayToggle.isChecked = false
+                binding.ovulationToggle.isChecked = false
+            }
+        }
+
+        binding.periodCalendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            val currentSelectedDate = LocalDate.of(year, month + 1, dayOfMonth)
+            currentSelectedDay = periodCalendarPresenter.getOrchidInfoForDate(currentSelectedDate)
+            updateControls()
+            updateDateDisplayed(currentSelectedDate)
+        }
+
+        binding.fab.setOnClickListener { view ->
+            var buttonDrawable: Drawable = view.background
+            buttonDrawable = DrawableCompat.wrap(buttonDrawable)
+            DrawableCompat.setTint(
+                buttonDrawable,
+                currentSelectedDay?.let {
+                    currentSelectedDay = null
+                    (view as FloatingActionButton).setImageResource(R.drawable.check_saved)
+                    ContextCompat.getColor(requireContext(), R.color.green)
+                } ?: run {
+                    periodCalendarPresenter.setPeriodToday()
+                    (view as FloatingActionButton).setImageResource(android.R.drawable.ic_delete)
+                    currentSelectedDay = periodCalendarPresenter.getOrchidInfoToday()
+                    ContextCompat.getColor(requireContext(), R.color.red)
+                })
+            view.background = buttonDrawable
+        }
+    }
+
+    private fun initCalendarControlData() {
+        updateDateDisplayed(LocalDate.now())
+
+        //Mock Values
+        binding.orchidDayToggle.isChecked = true
         binding.flowValue.text = Flow.Medium.name
+//        periodCalendarPresenter.setPeriod(LocalDate.now())
+        //End of Mock Values
+
+        updateControls()
+    }
+
+    private fun updateControls() {
         currentSelectedDay?.period?.let {
             binding.orchidDayToggle.isChecked = true
-            binding.flowValue.text = it.flow.name
+            binding.flowValue.text = it.flow?.name ?: ""
             binding.mucusValue.text = getText(R.string.feature_upcoming)
         }
         currentSelectedDay?.temperature?.let {
             binding.temperatureValue.text =
                 resources.getString(R.string.temperature_formatter, it.value, it.metric.name)
         }
-        if(binding.orchidDayToggle.isChecked){
+        if (binding.orchidDayToggle.isChecked) {
             binding.ovulationToggle.isChecked = false
             binding.fertilityToggle.isChecked = false
         }
     }
 
-    private fun testing() {
-//        val calendar = PeriodCalendar(PeriodPredictor(), OvulationPredictor())
-//        val periodDate: LocalDate = now()
-//        calendar.addPeriod(periodDate, Flow.LIGHT)
-//        calendar.addPeriod(periodDate.plusDays(1), Flow.LIGHT)
-//        calendar.addPeriod(periodDate.plusDays(2), Flow.LIGHT)
-//        calendar.addPeriod(periodDate.plusDays(3), Flow.LIGHT)
-//
-//        for (date in calendar.nextPeriodWindow.dates) {
-//            binding.periodCalendar.date = date.getLong(ChronoField.DAY_OF_MONTH)
-//        }
-
-        val builder: MaterialDatePicker.Builder<Long> = MaterialDatePicker.Builder.datePicker()
-        builder.setTitleText(getString(R.string.orchid_day_selector_title))
-//        val datePicker : MaterialDatePicker<Long> = builder.build()
-
-//        binding.orchidDateSelector.setOnClickListener {
-//            datePicker.show(parentFragmentManager, datePicker.toString())
-//        }
-//        datePicker.addOnPositiveButtonClickListener {
-//            Toast.makeText(
-//                requireContext(),
-//                "Selected Date : " + datePicker.headerText,
-//                Toast.LENGTH_SHORT
-//            ).show()
-//            binding.periodCalendar.date =
-//                periodCalendarPresenter.getFormatedSelectedDate(it)
-//
-//        }
-        binding.periodCalendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
-
-            //Todo implement logic to send data to presenter
-//            val localDate: LocalDate = LocalDate.of(year, month, dayOfMonth)
-
-            currentSelectedDay
-
-
-            // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
-            val msg = "Selected date is " + dayOfMonth + "/" + (month + 1) + "/" + year
-            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-        }
-
+    private fun updateDateDisplayed(date: LocalDate) {
+        val formatter = DateTimeFormatter.ofPattern("dd MMMM, yyyy");
+        binding.currentDate.text = date.format(formatter);
     }
 
     override fun onDestroyView() {

@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/karle/Desktop/Orchid-New/orchid-android/app/src/main/res/drawable-v24/check_saved.xml" value="0.1" />
+        <entry key="..\:/Users/karle/Desktop/Orchid-New/orchid-android/app/src/main/res/drawable/done-48px.xml" value="0.1" />
         <entry key="..\:/Users/karle/Desktop/Orchid-New/orchid-android/app/src/main/res/layout/activity_main.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/karle/Desktop/Orchid-New/orchid-android/app/src/main/res/layout/content_main.xml" value="0.12158054711246201" />
         <entry key="..\:/Users/karle/Desktop/Orchid-New/orchid-android/app/src/main/res/layout/fragment_first.xml" value="0.12158054711246201" />
