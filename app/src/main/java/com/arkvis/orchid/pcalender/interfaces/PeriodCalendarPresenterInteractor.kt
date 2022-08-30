@@ -6,7 +6,7 @@ import java.time.LocalDate
 interface PeriodCalendarPresenterInteractor {
     fun getOrchidInfoToday(): Day?
     fun getOrchidInfoForDate(date: LocalDate): Day?
-    fun deletePeriodToday()
+    fun clearPeriodToday()
     fun setPeriodToday()
-    fun setPeriod(date: LocalDate?)
+    fun setPeriod(date: LocalDate)
 }

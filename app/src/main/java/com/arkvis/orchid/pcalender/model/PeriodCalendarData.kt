@@ -14,12 +14,12 @@ class PeriodCalendarData : PeriodCalendarDataInteractor {
     override fun getPeriodDayInfo(date: LocalDate): Day? =
         periodCalendar.getDay(date)
 
-    override fun deletePeriod(date: LocalDate){
-        periodCalendar.deletePeriod(date)
+    override fun clearPeriod(date: LocalDate){
+        periodCalendar.clearPeriod(date)
     }
 
 
-    override fun setPeriodDay(date: LocalDate?) {
+    override fun setPeriodDay(date: LocalDate) {
         periodCalendar.addPeriod(date)
         onUpdate()
     }

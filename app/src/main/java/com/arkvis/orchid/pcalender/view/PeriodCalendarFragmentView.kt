@@ -82,7 +82,7 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInterac
     private fun updateFab() {
         binding.fab.let { fab: FloatingActionButton ->
             currentSelectedDay?.let {
-                fabDeleteAction(fab)
+                fabClearAction(fab)
             } ?: run {
                 fabSaveAction(fab)
             }
@@ -95,8 +95,8 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInterac
         setFab(fab, R.drawable.check_saved, R.color.green)
     }
 
-    private fun fabDeleteAction(fab: FloatingActionButton) {
-        periodCalendarPresenter.deletePeriodToday()
+    private fun fabClearAction(fab: FloatingActionButton) {
+        periodCalendarPresenter.clearPeriodToday()
         currentSelectedDay = null
         setFab(fab, android.R.drawable.ic_delete, R.color.red)
     }
@@ -125,7 +125,7 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInterac
 
         //Mock Values
         binding.orchidDayToggle.isChecked = true
-        binding.flowValue.text = Flow.Medium.name
+        binding.flowValue.text = Flow.MEDIUM.name
 //        periodCalendarPresenter.setPeriod(LocalDate.now())
         //End of Mock Values
 
