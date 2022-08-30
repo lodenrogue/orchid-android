@@ -25,6 +25,9 @@ class PeriodCalendarPresenter(periodCalendarView: PeriodCalendarFragmentView)  :
     override fun getOrchidInfoForDate(date: LocalDate) : Day? =
         periodCalendarData.getPeriodDayInfo(date)
 
+    override fun deletePeriodToday(){
+        periodCalendarData.deletePeriod(LocalDate.now())
+    }
     override fun setPeriodToday() {
         periodCalendarData.setPeriodDay(LocalDate.now())
     }

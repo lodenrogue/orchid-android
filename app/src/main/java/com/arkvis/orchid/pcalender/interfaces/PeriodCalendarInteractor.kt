@@ -6,6 +6,7 @@ import java.time.LocalDate
 
 interface PeriodCalendarDataInteractor {
     fun getPeriodDayInfo(date: LocalDate) : Day?
+    fun deletePeriod(date: LocalDate)
     fun setPeriodDay(date: LocalDate?)
 
 

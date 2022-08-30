@@ -221,7 +221,7 @@
         android:layout_marginEnd="@dimen/space_xs"
         android:layout_marginBottom="@dimen/space_xs"
         android:contentDescription="@string/fab"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/grey"
         app:backgroundTint="@color/black"
         app:borderWidth="@dimen/border_xs"
         app:layout_constraintBottom_toBottomOf="parent"

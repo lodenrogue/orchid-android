@@ -39,7 +39,6 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInterac
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initCalendarControl()
     }
 
@@ -76,22 +75,49 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInterac
         }
 
         binding.fab.setOnClickListener { view ->
-            var buttonDrawable: Drawable = view.background
-            buttonDrawable = DrawableCompat.wrap(buttonDrawable)
-            DrawableCompat.setTint(
-                buttonDrawable,
-                currentSelectedDay?.let {
-                    currentSelectedDay = null
-                    (view as FloatingActionButton).setImageResource(R.drawable.check_saved)
-                    ContextCompat.getColor(requireContext(), R.color.green)
-                } ?: run {
-                    periodCalendarPresenter.setPeriodToday()
-                    (view as FloatingActionButton).setImageResource(android.R.drawable.ic_delete)
-                    currentSelectedDay = periodCalendarPresenter.getOrchidInfoToday()
-                    ContextCompat.getColor(requireContext(), R.color.red)
-                })
-            view.background = buttonDrawable
+            updateFab()
         }
+    }
+
+    private fun updateFab() {
+        binding.fab.let { fab: FloatingActionButton ->
+            currentSelectedDay?.let {
+                fabDeleteAction(fab)
+            } ?: run {
+                fabSaveAction(fab)
+            }
+        }
+    }
+
+    private fun fabSaveAction(fab: FloatingActionButton) {
+        periodCalendarPresenter.setPeriodToday()
+        currentSelectedDay = periodCalendarPresenter.getOrchidInfoToday()
+        setFab(fab, R.drawable.check_saved, R.color.green)
+    }
+
+    private fun fabDeleteAction(fab: FloatingActionButton) {
+        periodCalendarPresenter.deletePeriodToday()
+        currentSelectedDay = null
+        setFab(fab, android.R.drawable.ic_delete, R.color.red)
+    }
+
+    private fun fabNoAction(fab: FloatingActionButton) {
+        fab.background?.let {
+            setFab(fab, android.R.drawable.ic_input_add, R.color.grey)
+        }
+    }
+
+    private fun setFab(fab: FloatingActionButton, drawable: Int, color: Int) {
+        var buttonDrawable: Drawable = fab.background
+        buttonDrawable = DrawableCompat.wrap(buttonDrawable)
+
+        fab.setImageResource(drawable)
+        DrawableCompat.setTint(
+            buttonDrawable,
+            ContextCompat.getColor(requireContext(), color)
+        )
+        fab.background = buttonDrawable
+
     }
 
     private fun initCalendarControlData() {
@@ -107,10 +133,12 @@ class PeriodCalendarFragmentView : Fragment(), PeriodCalendarFragmentViewInterac
     }
 
     private fun updateControls() {
+        fabNoAction(binding.fab)
         currentSelectedDay?.period?.let {
             binding.orchidDayToggle.isChecked = true
             binding.flowValue.text = it.flow?.name ?: ""
             binding.mucusValue.text = getText(R.string.feature_upcoming)
+            fabSaveAction(binding.fab)
         }
         currentSelectedDay?.temperature?.let {
             binding.temperatureValue.text =
