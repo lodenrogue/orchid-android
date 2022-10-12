@@ -7,20 +7,28 @@ import java.time.LocalDate
 
 class PeriodCalendarData : PeriodCalendarDataInteractor {
 
-    private var periodPredictor: PeriodPredictor = localStorage?.periodPredictor ?:PeriodPredictor()
-    private var ovulationPredictor: OvulationPredictor = localStorage?.ovulationPredictor ?:OvulationPredictor()
-    private var periodCalendar: PeriodCalendar = localStorage?.periodCalendar ?: PeriodCalendar(periodPredictor, ovulationPredictor)
+    private var periodPredictor: PeriodPredictor =
+        localStorage?.periodPredictor ?: PeriodPredictor()
+    private var ovulationPredictor: OvulationPredictor =
+        localStorage?.ovulationPredictor ?: OvulationPredictor()
+    private var periodCalendar: PeriodCalendar =
+        localStorage?.periodCalendar ?: PeriodCalendar(periodPredictor, ovulationPredictor)
 
     override fun getPeriodDayInfo(date: LocalDate): Day? =
         periodCalendar.getDay(date)
 
-    override fun clearPeriod(date: LocalDate){
-        periodCalendar.clearPeriod(date)
+    override fun setPeriodDay(date: LocalDate, flow: Flow) {
+        periodCalendar.addPeriod(date, flow)
+        onUpdate()
     }
-
 
     override fun setPeriodDay(date: LocalDate) {
         periodCalendar.addPeriod(date)
+        onUpdate()
+    }
+
+    override fun clearPeriod(date: LocalDate) {
+        periodCalendar.clearPeriod(date)
         onUpdate()
     }
 
@@ -66,7 +74,7 @@ class PeriodCalendarData : PeriodCalendarDataInteractor {
 //        TODO("Not yet implemented")
     }
 
-    private fun onUpdate(){
+    private fun onUpdate() {
         localStorage?.periodCalendar = periodCalendar
     }
 }

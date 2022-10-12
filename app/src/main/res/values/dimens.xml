@@ -6,4 +6,7 @@
     <dimen name="space_xs">8dp</dimen>
 
     <dimen name="border_xs">1dp</dimen>
+
+    <dimen name="zero">0dp</dimen>
+
 </resources>

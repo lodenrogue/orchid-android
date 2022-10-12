@@ -1,4 +1,7 @@
 package com.arkvis.orchid.common
 
-class FabState {
+enum class FabState {
+    NOACTION,
+    SAVED,
+    CLEARED
 }

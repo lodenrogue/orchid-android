@@ -1,6 +1,7 @@
 package com.arkvis.orchid.pcalender.presenter
 
 import com.arkvis.orchid.Day
+import com.arkvis.orchid.Flow
 import com.arkvis.orchid.pcalender.interfaces.PeriodCalendarPresenterInteractor
 import com.arkvis.orchid.pcalender.model.PeriodCalendarData
 import com.arkvis.orchid.pcalender.view.PeriodCalendarFragmentView
@@ -34,6 +35,10 @@ class PeriodCalendarPresenter(periodCalendarView: PeriodCalendarFragmentView)  :
 
     override fun setPeriod(date: LocalDate) {
         periodCalendarData.setPeriodDay(date)
+    }
+
+    override fun setPeriod(date: LocalDate, flow: Flow) {
+        periodCalendarData.setPeriodDay(date, flow)
     }
 
 }

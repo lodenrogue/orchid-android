@@ -20,12 +20,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/periodCalendar" />
+
     <TextView
-        android:textStyle="bold"
         android:id="@+id/currentDate"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/periodCalendar" />
@@ -78,12 +79,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/orchidDayLabel" />
 
-    <TextView
-        android:id="@+id/flowValue"
-        style="@style/CalendarEndControl"
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinnerFlowValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/middleGuideLine"
         app:layout_constraintTop_toTopOf="@id/flowLabel" />
@@ -92,6 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="@dimen/space_md"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/flowLabel" />
@@ -103,6 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mucus_label"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/flowLabel" />
@@ -113,6 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fluid"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/middleGuideLine"
         app:layout_constraintTop_toTopOf="@id/mucusLabel" />
@@ -121,6 +123,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="@dimen/space_md"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mucusLabel" />
@@ -132,6 +135,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temperature_label"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mucusLabel" />
@@ -142,6 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="F"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/middleGuideLine"
         app:layout_constraintTop_toTopOf="@id/temperatureLabel" />
@@ -150,6 +155,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="@dimen/space_md"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/temperatureLabel" />
@@ -161,6 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ovulation_label"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/temperatureLabel" />
@@ -173,6 +180,7 @@
         android:layout_height="wrap_content"
         android:textOff="@string/toggle_btn_off"
         android:textOn="@string/toggle_btn_on"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/middleGuideLine"
         app:layout_constraintTop_toTopOf="@id/ovulationLabel" />
@@ -181,6 +189,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="@dimen/space_md"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ovulationLabel" />
@@ -192,6 +201,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/fertility_label"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/middleGuideLine"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ovulationLabel" />
@@ -203,6 +213,7 @@
         android:layout_height="wrap_content"
         android:textOff="@string/toggle_btn_off"
         android:textOn="@string/toggle_btn_on"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/middleGuideLine"
         app:layout_constraintTop_toTopOf="@id/fertilityLabel" />
@@ -210,6 +221,7 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fertilityLabel" />
@@ -221,12 +233,10 @@
         android:layout_marginEnd="@dimen/space_xs"
         android:layout_marginBottom="@dimen/space_xs"
         android:contentDescription="@string/fab"
-        android:backgroundTint="@color/grey"
-        app:backgroundTint="@color/black"
-        app:borderWidth="@dimen/border_xs"
+        app:borderWidth="@dimen/zero"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"/>
+        app:srcCompat="@android:drawable/ic_input_add" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/middleGuideLine"
