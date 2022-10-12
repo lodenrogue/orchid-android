@@ -22,4 +22,11 @@
     <style name="Theme.Orchid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Orchid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="CalendarStartControl">
+        <item name="android:padding">@dimen/space_md</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="CalendarEndControl">
+        <item name="android:padding">@dimen/space_md</item>
+    </style>
 </resources>

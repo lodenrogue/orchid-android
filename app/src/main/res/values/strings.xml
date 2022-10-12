@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">orchid</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Orchid</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -9,4 +9,17 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="fab">fab</string>
+    <string name="orchid_days_selector">Orchid Day Selector</string>
+    <string name="orchid_day_selector_title">Select Orchid Day</string>
+    <string name="orchid_day_label" tools:ignore="ExtraTranslation">Orchid Day :</string>
+    <string name="flow_label" tools:ignore="ExtraTranslation">Flow :</string>
+    <string name="mucus_label" tools:ignore="ExtraTranslation">Mucus :</string>
+    <string name="temperature_label" tools:ignore="ExtraTranslation">Temperature :</string>
+    <string name="ovulation_label" tools:ignore="ExtraTranslation">Ovulation :</string>
+    <string name="fertility_label" tools:ignore="ExtraTranslation">Fertility :</string>
+    <string name="toggle_btn_on" tools:ignore="ExtraTranslation">Yes</string>
+    <string name="toggle_btn_off" tools:ignore="ExtraTranslation">No</string>
+    <string name="temperature_formatter" tools:ignore="ExtraTranslation">%d %s</string>
+    <string name="feature_upcoming" tools:ignore="ExtraTranslation">Upcoming Feature</string>
 </resources>

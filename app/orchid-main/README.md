@@ -1,66 +1,69 @@
 # Orchid
+
 ### 100% offline period tracker. You own the data. It can't ever be sold, shared, or divulged because it never leaves your device.
 
 ### Usage
 
 Create a calendar
 
-``` java
-PeriodCalendar calendar = new PeriodCalendar(new PeriodPredictor(), new OvulationPredictor());
+``` kotlin
+val calendar = PeriodCalendar(PeriodPredictor(), OvulationPredictor())
 ```
 
 Add a period
 
-``` java
-LocalDate periodDate = LocalDate.now();
-calendar.addPeriod(periodDate);
+``` kotlin
+val periodDate = LocalDate.now()
+calendar.addPeriod(periodDate)
 ```
 
 Add a period with flow
 
-``` java
-LocalDate periodDate = LocalDate.now();
-calendar.addPeriod(periodDate, Flow.LIGHT);
+``` kotlin
+val periodDate = LocalDate.now()
+calendar.addPeriod(periodDate, Flow.LIGHT)
 ```
 
 Get a period
 
-``` java
-Day day = calendar.getDay(periodDate);
-Period period = day.getPeriod();
+``` kotlin
+val day = calendar.getDay(periodDate)
+val period = day.period
 ```
 
 Get a period with flow
 
-``` java
-Day day = calendar.getDay(periodDate);
-Period period = day.getPeriod();
-Flow flow = period.getFlow();
+``` kotlin
+val day = calendar.getDay(periodDate)
+val period = day.period
+val flow = period?.flow
 ```
 
 Predict next period window
 
-``` java
-PeriodWindow periodWindow = calendar.getNextPeriodWindow();
-boolean isEmpty = periodWindow.isEmpty();
+``` kotlin
+val periodWindow = calendar.getNextPeriodWindow()
+val isEmpty = periodWindow.isEmpty()
 
-LocalDate startDate = periodWindow.getStartDate();
-List<LocalDate> dates = periodWindow.getDates();
+val startDate = periodWindow.getStartDate()
+val dates = periodWindow.dates
 ```
 
 Predict next fertility window
 
-``` java
-FertilityWindow fertilityWindow = calendar.getNextFertilityWindow();
-List<LocalDate> nextFertilityWindow = fertilityWindow.getFertilityWindow();
-LocalDate ovulationDate = fertilityWindow.getOvulationDate();
+``` kotlin
+val fertilityWindow = calendar.getNextFertilityWindow()
+val isEmpty = fertilityWindow.isEmpty()
+
+val fertilityDates = fertilityWindow.dates
+val ovulationDate = fertilityWindow.ovulationDate
 ```
 
 Add temperature
 
-``` java
-Temperature temperature = new Temperature(new BigDecimal("98.6"), Metric.FAHRENHEIT);
-calendar.addTemperature(date, temperature);
+``` kotlin
+val temperature = Temperature(BigDecimal("98.6"), Metric.FAHRENHEIT)
+calendar.addTemperature(date, temperature)
 
-Temperature retrievedTemperature = calendar.getDay(date).getTemperature();
+val retrievedTemperature = calendar.getDay(date).temperature
 ```
